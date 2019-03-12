@@ -17,13 +17,13 @@ import java.util.Map;
 public class BaseServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private static final ThreadLocal<HttpServletRequest> HTTP_SERVLET_REQUEST_THREAD_LOCAL = new ThreadLocal<>();
-    private static final ThreadLocal<HttpServletResponse> HTTP_SERVLET_RESPONSE_THREAD_LOCAL = new ThreadLocal<>();
+    private HttpServletRequest request;
+    private HttpServletResponse response;
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HTTP_SERVLET_REQUEST_THREAD_LOCAL.set(req);
-        HTTP_SERVLET_RESPONSE_THREAD_LOCAL.set(resp);
+        this.request = req;
+        this.response = resp;
         try {
             Map<String, String[]> parameterMap = req.getParameterMap();
 
@@ -65,9 +65,6 @@ public class BaseServlet extends HttpServlet {
             e.printStackTrace();
             req.setAttribute("error", e.getTargetException());
             req.getRequestDispatcher("/WEB-INF/errors/500.jsp").forward(req, resp);
-        } finally {
-            HTTP_SERVLET_REQUEST_THREAD_LOCAL.remove();
-            HTTP_SERVLET_RESPONSE_THREAD_LOCAL.remove();
         }
     }
 
@@ -76,10 +73,10 @@ public class BaseServlet extends HttpServlet {
     }
 
     protected HttpServletRequest getRequest() {
-        return HTTP_SERVLET_REQUEST_THREAD_LOCAL.get();
+        return this.request;
     }
 
     protected HttpServletResponse getResponse() {
-        return HTTP_SERVLET_RESPONSE_THREAD_LOCAL.get();
+        return this.response;
     }
 }

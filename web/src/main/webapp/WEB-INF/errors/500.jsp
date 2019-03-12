@@ -11,6 +11,6 @@
     <title>System error</title>
 </head>
 <body>
-
+    ${error.message}
 </body>
 </html>

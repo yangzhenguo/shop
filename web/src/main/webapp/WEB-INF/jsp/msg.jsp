@@ -75,7 +75,7 @@
 			</div>
 
 			<div class="container-fluid">
-				<h1>${msg }</h1>
+				<h1>${result.message }</h1>
 			</div>
 
 		</div>

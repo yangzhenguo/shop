@@ -94,21 +94,14 @@
 			</nav>
 		</div>
 
-
-
-
-
 <div class="container" style="width:100%;background:url('${pageContext.request.contextPath}/image/regist_bg.jpg');">
 <div class="row"> 
 
 	<div class="col-md-2"></div>
-	
-	
-
 
 	<div class="col-md-8" style="background:#fff;padding:40px 80px;margin:30px;border:7px solid #ccc;">
 		<font>会员注册</font>USER REGISTER
-		<form class="form-horizontal" style="margin-top:5px;">
+		<form class="form-horizontal" style="margin-top:5px;" method="post" action="/user?method=registerSubmit">
 			 <div class="form-group">
 			    <label for="username" class="col-sm-2 control-label">用户名</label>
 			    <div class="col-sm-6">
