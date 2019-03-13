@@ -14,4 +14,8 @@ public interface UserDao {
     Optional<User> getByUID(String uid) throws SQLException;
 
     Optional<User> insert(User user) throws SQLException;
+
+    Optional<User> getByCode(String code) throws SQLException;
+
+    boolean updateStateByCode(String code, int state) throws SQLException;
 }

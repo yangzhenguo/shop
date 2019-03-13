@@ -28,6 +28,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public Optional<User> getByCode(String code) throws SQLException {
+        return Optional.ofNullable(this.queryRunner.query("select * from user where code = ?", new BeanHandler<User>(User.class), code));
+    }
+
+    @Override
+    public boolean updateStateByCode(String code, int state) throws SQLException {
+        return this.queryRunner.update("update user set state = ? where code = ?", state, code) > 0;
+    }
+
+    @Override
     public Optional<User> insert(User user) throws SQLException {
         this.queryRunner.update(
                 "insert into user (uid, username, password, name, email, telephone, birthday, sex, state, code) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",

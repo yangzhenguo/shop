@@ -13,4 +13,6 @@ public interface UserService {
     Map<String, Object> register(UserRequest userRequest) throws SQLException;
 
     Map<String,Object> login(LoginRequest loginRequest) throws SQLException;
+
+    Map<String,Object> active(String code) throws SQLException;
 }
