@@ -25,7 +25,6 @@ public class UserDaoImplTest {
     public void insert() throws Exception {
         User user = new User();
         user.setUid(UUIDUtil.getUUIDStr());
-        System.out.println(user.getUid());
         Optional<User> userOptional = this.userDao.insert(user);
         assertTrue(userOptional.isPresent());
     }

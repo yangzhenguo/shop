@@ -1,6 +1,7 @@
 package com.hiyzg.shop.web.servlet;
 
 import com.alibaba.fastjson.JSON;
+import com.hiyzg.shop.service.annotations.AutoSkip;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,6 +47,34 @@ public class BaseServlet extends HttpServlet {
                         resp.sendRedirect(resultStr.substring(9));
                     } else {
                         req.getRequestDispatcher(resultStr).forward(req, resp);
+                    }
+                } else if (action.getReturnType() == Map.class) {
+                    if (action.isAnnotationPresent(AutoSkip.class)) {
+                        AutoSkip autoSkipAnnoation = action.getAnnotation(AutoSkip.class);
+                        String dataName = autoSkipAnnoation.value();
+                        String successPage = autoSkipAnnoation.success();
+                        String failurePage = autoSkipAnnoation.failure();
+                        Map map = (Map)result;
+                        if (!map.containsKey(dataName)) {
+                            req.setAttribute(dataName, result);
+//                            throw new RuntimeException(String.format("AutoSkip的Map返回值必须包含%s数据", dataName));
+                        }
+                        Boolean realSuccess = (Boolean)map.getOrDefault("success", false);
+                        if (realSuccess) {
+                            if (successPage.startsWith("redirect:")) {
+                                resp.sendRedirect(successPage.substring(9));
+                            } else {
+                                req.getRequestDispatcher(successPage).forward(req, resp);
+                            }
+                        } else {
+                            if (failurePage.startsWith("redirect:")) {
+                                resp.sendRedirect(failurePage.substring(9));
+                            } else {
+                                req.getRequestDispatcher(failurePage).forward(req, resp);
+                            }
+                        }
+                    } else {
+                        throw new RuntimeException("AutoSkip目前只支持Map返回值");
                     }
                 } else {
                     resp.setCharacterEncoding("UTF-8");

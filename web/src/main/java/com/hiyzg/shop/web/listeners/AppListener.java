@@ -16,7 +16,9 @@ public class AppListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         // 注册日期转换器
-        ConvertUtils.register(new DateConverter(null), Date.class);
+        DateConverter dateConverter = new DateConverter(null);
+        dateConverter.setPattern("yyyy-MM-dd");
+        ConvertUtils.register(dateConverter, Date.class);
     }
 
     @Override

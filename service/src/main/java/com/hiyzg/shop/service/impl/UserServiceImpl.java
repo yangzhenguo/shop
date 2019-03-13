@@ -4,9 +4,11 @@ import com.hiyzg.shop.dao.UserDao;
 import com.hiyzg.shop.dao.impl.UserDaoImpl;
 import com.hiyzg.shop.model.User;
 import com.hiyzg.shop.service.UserService;
+import com.hiyzg.shop.service.model.LoginRequest;
 import com.hiyzg.shop.service.model.UserRequest;
 import com.hiyzg.shop.util.UUIDUtil;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -30,7 +32,10 @@ public class UserServiceImpl implements UserService {
         }
         userRequest.setUid(UUIDUtil.getUUIDStr());  // 这测试设置uuid为主键
         userRequest.setState(0);    // 未激活, 无法登录
-        userRequest.setPassword(DigestUtils.md5Hex(userRequest.getPassword()));
+        userRequest.setCode(UUIDUtil.getUUIDStr());
+        if (StringUtils.isNotEmpty(userRequest.getPassword())) {
+            userRequest.setPassword(DigestUtils.md5Hex(userRequest.getPassword()));
+        }
         Optional<User> userOptional = this.userDao.insert(userRequest);
         if (userOptional.isPresent()) {
             result.put("success", true);
@@ -40,6 +45,23 @@ public class UserServiceImpl implements UserService {
             result.put("success", false);
             result.put("message", "用户注册失败，请稍后重试");
         }
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> login(LoginRequest loginRequest) throws SQLException {
+        Map<String, Object> result = new HashMap<>();
+        Optional<User> userOptional = this.userDao.getByUsername(loginRequest.getUsername());
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (user.getPassword().equals(DigestUtils.md5Hex(loginRequest.getPassword()))) {
+                result.put("success", true);
+                result.put("message", "登录成功");
+                return result;
+            }
+        }
+        result.put("success", false);
+        result.put("message", "用户名或密码错误");
         return result;
     }
 }

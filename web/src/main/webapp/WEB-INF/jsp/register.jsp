@@ -129,17 +129,17 @@
 			 <div class="form-group">
 			    <label for="usercaption" class="col-sm-2 control-label">姓名</label>
 			    <div class="col-sm-6">
-			      <input type="text" class="form-control" name="nickname" id="usercaption" placeholder="请输入姓名">
+			      <input type="text" class="form-control" name="name" id="usercaption" placeholder="请输入姓名">
 			    </div>
 			  </div>
 			  <div class="form-group opt">  
 			  <label for="inlineRadio1" class="col-sm-2 control-label">性别</label>  
 			  <div class="col-sm-6">
 			    <label class="radio-inline">
-			  <input type="radio" name="gender" id="inlineRadio1" value="1"> 男
+			  <input type="radio" name="sex" id="inlineRadio1" value="1"> 男
 			</label>
 			<label class="radio-inline">
-			  <input type="radio" name="gender" id="inlineRadio2" value="0"> 女
+			  <input type="radio" name="sex" id="inlineRadio2" value="0"> 女
 			</label>
 			</div>
 			  </div>		
