@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
             } else {
                 boolean success = this.userDao.updateStateByCode(code, UserConstant.USER_IS_ACTIVE);
                 result.put(CommonConstant.SUCCESS, success);
-                result.put(CommonConstant.MESSAGE, success ? "激活成功" : "激活失败");
+                result.put(CommonConstant.MESSAGE, success ? "激活成功, 请登录网站" : "激活失败");
             }
         } else {
             result.put(CommonConstant.SUCCESS, false);

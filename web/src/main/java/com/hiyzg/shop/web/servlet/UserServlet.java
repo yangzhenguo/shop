@@ -41,7 +41,7 @@ public class UserServlet extends BaseServlet {
     }
 
     @AutoSkip(
-            success = "redirect:/",
+            success = "/WEB-INF/jsp/msg.jsp",
             failure = "/WEB-INF/jsp/msg.jsp"
     )
     public Map<String, Object> activeSubmit() throws InvocationTargetException, IllegalAccessException, SQLException {
