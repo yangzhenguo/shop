@@ -15,17 +15,16 @@ import java.util.Properties;
  * Created by Sam on 2019/3/12.
  */
 public class MailUtil {
+    public static String MAIL_CONTENT_HOST;
+
     private static Properties properties = new Properties();
-    private static String HOST;
-    private static String PROTOCOL;
     private static String FROM;
     private static String PASSWORD;
 
     static {
         try {
             properties.load(MailUtil.class.getResourceAsStream("/mail.properties"));
-            HOST = properties.getProperty("mail.host");
-            PROTOCOL = properties.getProperty("mail.protocol");
+            MAIL_CONTENT_HOST = properties.getProperty("mail.content.host");
             FROM = properties.getProperty("mail.from");
             PASSWORD = properties.getProperty("mail.password");
         } catch (IOException e) {

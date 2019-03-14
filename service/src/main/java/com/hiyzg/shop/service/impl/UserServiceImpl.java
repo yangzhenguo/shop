@@ -8,6 +8,7 @@ import com.hiyzg.shop.service.constants.CommonConstant;
 import com.hiyzg.shop.service.constants.UserConstant;
 import com.hiyzg.shop.service.model.LoginRequest;
 import com.hiyzg.shop.service.model.UserRequest;
+import com.hiyzg.shop.util.MailUtil;
 import com.hiyzg.shop.util.UUIDUtil;
 import lombok.NonNull;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -41,6 +42,13 @@ public class UserServiceImpl implements UserService {
         }
         Optional<User> userOptional = this.userDao.insert(userRequest);
         if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (StringUtils.isNotEmpty(user.getEmail())) {
+                String href = MailUtil.MAIL_CONTENT_HOST + "/user?method=activeSubmit&code=" + user.getCode();
+                String content = String.format("<a href=\"%s\">点击此处激活账号</a>", href);
+                MailUtil.sendSimpleMail(user.getEmail(), "账号激活", content);
+                System.out.println(content);
+            }
             result.put("success", true);
             result.put("message", "用户注册成功");
             result.put("data", userOptional.get());
