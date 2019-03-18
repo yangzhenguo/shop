@@ -5,36 +5,42 @@ import com.hiyzg.shop.service.ProductService;
 import com.hiyzg.shop.service.annotations.AutoSkip;
 import com.hiyzg.shop.service.constants.CommonConstant;
 import com.hiyzg.shop.service.impl.ProductServiceImpl;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.annotation.WebServlet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by Sam on 2019/3/8.
  */
-@WebServlet("/index")
-public class HomeServlet extends BaseServlet {
+@WebServlet("/product")
+public class ProductServlet extends BaseServlet {
     private static final long serialVersionUID = 1L;
 
     private ProductService productService = new ProductServiceImpl();
 
+
     @AutoSkip(
-            success = "/WEB-INF/jsp/index.jsp",
+            success = "/WEB-INF/jsp/product_info.jsp",
             failure = "/WEB-INF/jsp/msg.jsp"
     )
     @Override
     public Map<String, Object> index() throws SQLException {
+        String pid = this.getRequest().getParameter("pid");
         Map<String, Object> result = new HashMap<>();
-        List<Product> hotProducts = this.productService.listHot();
-        List<Product> newProducts = this.productService.listNew();
-        this.getRequest().setAttribute("hotProducts", hotProducts);
-        this.getRequest().setAttribute("newProducts", newProducts);
-        result.put("hotProducts", hotProducts);
-        result.put("newProducts", newProducts);
-        result.put(CommonConstant.SUCCESS, true);
-        return result;
+        if (StringUtils.isBlank(pid)) {
+            throw new RuntimeException("产品不存在");
+        }
+        Optional<Product> productOptional = this.productService.getByPid(pid);
+        if (productOptional.isPresent()) {
+            result.put(CommonConstant.SUCCESS, true);
+            result.put("product", productOptional.get());
+            return result;
+        } else {
+            throw new RuntimeException("产品不存在");
+        }
     }
 }

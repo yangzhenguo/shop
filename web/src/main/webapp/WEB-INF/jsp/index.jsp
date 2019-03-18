@@ -140,12 +140,12 @@
 						</a>
 					</div>
 
-					<c:forEach items="${hotProducts}" var="product">
+					<c:forEach items="${result.hotProducts}" var="product">
 					<div class="col-md-2" style="text-align:center;height:200px;padding:10px 0px;">
-						<a href="product_info.htm">
+						<a href="${pageContext.request.contextPath}/product?pid=${product.pid}">
 							<img src="${pageContext.request.contextPath}/${product.pimage}" width="130" height="130" style="display: inline-block;">
 						</a>
-						<p style="text-align: center;"><a href="product_info.html" style='color:#666; display: inline-block; white-space: nowrap; max-width: 140px; text-align: center; overflow: hidden; text-overflow: ellipsis;'>${product.pname}</a></p>
+						<p style="text-align: center;"><a href="${pageContext.request.contextPath}/product?pid=${product.pid}" style='color:#666; display: inline-block; white-space: nowrap; max-width: 140px; text-align: center; overflow: hidden; text-overflow: ellipsis;'>${product.pname}</a></p>
 						<p><font color="#E4393C" style="font-size:16px">&yen;${product.shop_price}</font></p>
 					</div>
 					</c:forEach>
@@ -178,12 +178,12 @@
 						</a>
 					</div>
 
-					<c:forEach items="${newProducts}" var="product">
+					<c:forEach items="${result.newProducts}" var="product">
 					<div class="col-md-2" style="text-align:center;height:200px;padding:10px 0px;">
-						<a href="product_info.htm">
+						<a href="${pageContext.request.contextPath}/product?pid=${product.pid}">
 							<img src="${pageContext.request.contextPath}/${product.pimage}" width="130" height="130" style="display: inline-block;">
 						</a>
-						<p style="text-align: center;"><a href="product_info.html" style='color:#666; display: inline-block; white-space: nowrap; max-width: 140px; text-align: center; overflow: hidden; text-overflow: ellipsis;'>${product.pname}</a></p>
+						<p style="text-align: center;"><a href="${pageContext.request.contextPath}/product?pid=${product.pid}" style='color:#666; display: inline-block; white-space: nowrap; max-width: 140px; text-align: center; overflow: hidden; text-overflow: ellipsis;'>${product.pname}</a></p>
 						<p><font color="#E4393C" style="font-size:16px">&yen;${product.shop_price}</font></p>
 					</div>
 					</c:forEach>
