@@ -2,9 +2,9 @@ package com.hiyzg.shop.web.servlet;
 
 import com.hiyzg.shop.service.UserService;
 import com.hiyzg.shop.service.annotations.AutoSkip;
-import com.hiyzg.shop.service.impl.UserServiceImpl;
 import com.hiyzg.shop.service.model.LoginRequest;
 import com.hiyzg.shop.service.model.UserRequest;
+import com.hiyzg.shop.service.util.BeanFactory;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +19,7 @@ import java.util.Map;
 public class UserServlet extends BaseServlet {
     private static final long serialVersionUID = 1L;
 
-    private UserService userService = new UserServiceImpl();
+    private UserService userService = (UserService) BeanFactory.SERVICE_BEANS.get("UserService");
 
     public String login() {
         return "/WEB-INF/jsp/login.jsp";

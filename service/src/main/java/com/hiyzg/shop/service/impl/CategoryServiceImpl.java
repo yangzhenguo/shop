@@ -1,7 +1,7 @@
 package com.hiyzg.shop.service.impl;
 
 import com.hiyzg.shop.dao.CategoryDao;
-import com.hiyzg.shop.dao.impl.CategoryDaoImpl;
+import com.hiyzg.shop.dao.util.BeanFactory;
 import com.hiyzg.shop.model.Category;
 import com.hiyzg.shop.service.CategoryService;
 import org.ehcache.Cache;
@@ -19,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
     private static final String CATEGORY_KEY = "list";
     private static Cache<String, Object> categoryCache = CACHE_MANAGER.getCache(CATEGORY, String.class, Object.class);
 
-    private CategoryDao categoryDao = new CategoryDaoImpl();
+    private CategoryDao categoryDao = (CategoryDao) BeanFactory.DAO_BEANS.get("CategoryDao");
 
     @Override
     public List<Category> findAll() throws SQLException {

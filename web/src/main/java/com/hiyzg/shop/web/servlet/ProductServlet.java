@@ -5,6 +5,7 @@ import com.hiyzg.shop.service.ProductService;
 import com.hiyzg.shop.service.annotations.AutoSkip;
 import com.hiyzg.shop.service.constants.CommonConstant;
 import com.hiyzg.shop.service.impl.ProductServiceImpl;
+import com.hiyzg.shop.service.util.BeanFactory;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ import java.util.Optional;
 public class ProductServlet extends BaseServlet {
     private static final long serialVersionUID = 1L;
 
-    private ProductService productService = new ProductServiceImpl();
+    private ProductService productService = (ProductService) BeanFactory.SERVICE_BEANS.get("ProductService");
 
 
     @AutoSkip(

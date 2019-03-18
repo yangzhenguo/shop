@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+    <bean id="UserService" class="com.hiyzg.shop.service.impl.UserServiceImpl"/>
+    <bean id="CategoryService" class="com.hiyzg.shop.service.impl.CategoryServiceImpl"/>
+    <bean id="ProductService" class="com.hiyzg.shop.service.impl.ProductServiceImpl"/>
+</beans>

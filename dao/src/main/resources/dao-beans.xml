@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+    <bean id="UserDao" class="com.hiyzg.shop.dao.impl.UserDaoImpl"/>
+    <bean id="CategoryDao" class="com.hiyzg.shop.dao.impl.CategoryDaoImpl"/>
+    <bean id="ProductDao" class="com.hiyzg.shop.dao.impl.ProductDaoImpl"/>
+</beans>

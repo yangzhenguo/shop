@@ -1,7 +1,7 @@
 package com.hiyzg.shop.service.impl;
 
 import com.hiyzg.shop.dao.ProductDao;
-import com.hiyzg.shop.dao.impl.ProductDaoImpl;
+import com.hiyzg.shop.dao.util.BeanFactory;
 import com.hiyzg.shop.model.Product;
 import com.hiyzg.shop.service.ProductService;
 import org.ehcache.Cache;
@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
     private static Cache<String, Object> categoryCache = CACHE_MANAGER.getCache(PRODUCT, String.class, Object.class);
 
-    private ProductDao productDao = new ProductDaoImpl();
+    private ProductDao productDao = (ProductDao) BeanFactory.DAO_BEANS.get("ProductDao");;
 
     @Override
     public List<Product> listHot() throws SQLException {

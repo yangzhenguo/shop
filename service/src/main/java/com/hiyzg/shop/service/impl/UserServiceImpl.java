@@ -1,7 +1,7 @@
 package com.hiyzg.shop.service.impl;
 
 import com.hiyzg.shop.dao.UserDao;
-import com.hiyzg.shop.dao.impl.UserDaoImpl;
+import com.hiyzg.shop.dao.util.BeanFactory;
 import com.hiyzg.shop.model.User;
 import com.hiyzg.shop.service.UserService;
 import com.hiyzg.shop.service.constants.CommonConstant;
@@ -10,7 +10,6 @@ import com.hiyzg.shop.service.model.LoginRequest;
 import com.hiyzg.shop.service.model.UserRequest;
 import com.hiyzg.shop.util.MailUtil;
 import com.hiyzg.shop.util.UUIDUtil;
-import lombok.NonNull;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,7 +22,7 @@ import java.util.Optional;
  * Created by Sam on 2019/3/11.
  */
 public class UserServiceImpl implements UserService {
-    private UserDao userDao = new UserDaoImpl();
+    private UserDao userDao = (UserDao) BeanFactory.DAO_BEANS.get("UserDao");
 
     @Override
     public Map<String, Object> register(UserRequest userRequest) throws SQLException {
