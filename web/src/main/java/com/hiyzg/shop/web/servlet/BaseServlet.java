@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -97,7 +98,7 @@ public class BaseServlet extends HttpServlet {
         }
     }
 
-    protected Object index() {
+    protected Object index() throws SQLException {
         return null;
     }
 
