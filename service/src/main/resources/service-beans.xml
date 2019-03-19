@@ -4,4 +4,5 @@
     <bean id="CategoryService" class="com.hiyzg.shop.service.impl.CategoryServiceImpl"/>
     <bean id="ProductService" class="com.hiyzg.shop.service.impl.ProductServiceImpl"/>
     <bean id="CartService" class="com.hiyzg.shop.service.impl.CartServiceImpl"/>
+    <bean id="OrderService" class="com.hiyzg.shop.service.impl.OrderServiceImpl"/>
 </beans>

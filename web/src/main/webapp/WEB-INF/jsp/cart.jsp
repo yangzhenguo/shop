@@ -55,8 +55,10 @@
 				</div>
 				<div class="col-md-3" style="padding-top:20px">
 					<ol class="list-inline">
-						<li><a href="login.htm">登录</a></li>
-						<li><a href="register.htm">注册</a></li>
+						<c:if test="${empty user}">
+						<li><a href="${requestScope.request.contextPath}/user?method=login">登录</a></li>
+						<li><a href="${requestScope.request.contextPath}/user?method=register">注册</a></li>
+						</c:if>
 						<li><a href="cart.htm">购物车</a></li>
 					</ol>
 				</div>
@@ -152,7 +154,7 @@
 				</div>
 				<div style="text-align:right;margin-top:10px;margin-bottom:10px;">
 					<a href="${pageContext.request.contextPath}/cart?method=clear" id="clear" class="clear">清空购物车</a>
-					<a href="order_info.htm">
+					<a href="${pageContext.request.contextPath}/order?method=add">
 						<input type="submit" width="100" value="提交订单" name="submit" border="0" style="background: url('${pageContext.request.contextPath}/images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 						height:35px;width:100px;color:white;">
 					</a>

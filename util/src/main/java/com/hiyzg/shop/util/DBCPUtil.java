@@ -3,6 +3,8 @@ package com.hiyzg.shop.util;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
 
 /**
@@ -11,6 +13,7 @@ import java.util.Properties;
 public class DBCPUtil {
     private static final Properties properties = new Properties();
     private static DataSource DATA_SOURCE;
+    private static ThreadLocal<Connection> conn = new ThreadLocal<>();
 
     static {
         try {
@@ -24,5 +27,31 @@ public class DBCPUtil {
 
     public static DataSource getDataSource() {
         return DATA_SOURCE;
+    }
+
+    public static Connection getConnection() {
+        try {
+            Connection connection = conn.get();
+            if (connection == null) {
+                connection = DATA_SOURCE.getConnection();
+                conn.set(connection);
+            }
+            return connection;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public static void close() {
+        try {
+            Connection connection = conn.get();
+            if (connection != null) {
+                connection.close();
+                conn.remove();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

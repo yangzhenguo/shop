@@ -37,7 +37,7 @@ public class CategoryTag extends SimpleTagSupport {
             String liTag = String.format(
                     "<li%s><a href=\"%s\">%s</a></li>",
                     i == 0 ? " class=\"active\"" : "",
-                    contextPath + (category.getCurl() == null ? "" : category.getCurl()),
+                    contextPath + (category.getCurl() == null ? ((HttpServletRequest) pageContext.getRequest()).getContextPath() + "/product?cid=" + category.getCid() : category.getCurl()),
                     category.getCname()
             );
             out.write(liTag);

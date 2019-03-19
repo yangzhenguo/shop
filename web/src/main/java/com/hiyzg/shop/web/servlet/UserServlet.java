@@ -2,6 +2,7 @@ package com.hiyzg.shop.web.servlet;
 
 import com.hiyzg.shop.service.UserService;
 import com.hiyzg.shop.service.annotations.AutoSkip;
+import com.hiyzg.shop.service.constants.CommonConstant;
 import com.hiyzg.shop.service.model.LoginRequest;
 import com.hiyzg.shop.service.model.UserRequest;
 import com.hiyzg.shop.service.util.BeanFactory;
@@ -56,6 +57,10 @@ public class UserServlet extends BaseServlet {
     public Map<String, Object> loginSubmit() throws InvocationTargetException, IllegalAccessException, SQLException {
         LoginRequest loginRequest = new LoginRequest();
         BeanUtils.populate(loginRequest, this.getRequest().getParameterMap());
-        return this.userService.login(loginRequest);
+        Map<String, Object> result = this.userService.login(loginRequest);
+        if ((Boolean) result.get(CommonConstant.SUCCESS)) {
+            this.getRequest().getSession().setAttribute("user", result.get("user"));
+        }
+        return result;
     }
 }

@@ -72,6 +72,7 @@ public class UserServiceImpl implements UserService {
             } else if (user.getPassword().equals(DigestUtils.md5Hex(loginRequest.getPassword()))) {
                 result.put("success", true);
                 result.put("message", "登录成功");
+                result.put("user", user);
                 return result;
             }
         }
