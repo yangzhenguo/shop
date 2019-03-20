@@ -29,3 +29,5 @@ package-lock.json
 node_modules/.bin
 node_modules
 logs
+/web/src/main/webapp/dist/
+/web/src/main/webapp/assets/

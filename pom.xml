@@ -88,6 +88,37 @@
                     <path>/</path>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <inherited>false</inherited>
+                        <id>npm start</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>/Users/Sam/.nvm/versions/node/v8.10.0/bin/npm</executable>
+                            <arguments>
+                                <argument>start</argument>
+                            </arguments>
+                            <workingDirectory>pages</workingDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>/Users/Sam/.nvm/versions/node/v8.10.0/bin/npm</executable>
+                    <arguments>
+                        <argument>start</argument>
+                    </arguments>
+                    <workingDirectory>pages</workingDirectory>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
